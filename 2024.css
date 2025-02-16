@@ -1,0 +1,574 @@
+/* main contents 2024 */
+
+
+.contents {
+  display: flex;
+  height: 90vh;
+  overflow: hidden; /* 親要素にはスクロールさせない */
+  flex-grow: 1;  
+  flex-wrap: nowrap;
+  }
+
+.leftside, .rightside {
+overflow-y: auto;
+border-right: 1px solid var(--grayA);
+
+}
+
+@media (max-width: 720px) {
+  .contents {
+    height: 100%; 
+    flex-wrap: wrap;
+    overflow:scroll; /* 親要素にはスクロールさせない */
+  }
+}
+
+
+/* leftside */
+
+.leftside {
+flex: 1; /* 左側は2つの単位 */
+display: relative;
+width: 50vw;
+background: linear-gradient(to top, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+}
+
+
+@media only screen and (max-width: 720px){
+  .leftside {
+    width: 90vw;
+    height: 100%;
+  }
+  }
+
+.highlight {
+  text-decoration: underline;
+  text-underline-position: under; 
+  text-decoration-style: dotted;
+}
+
+
+
+/* details */
+
+details { 
+display: block; /* as default*/
+margin: 0;
+padding: 0;
+border: none;
+outline: none !important; /* フォーカスの枠線を削除 */
+}
+
+summary {
+cursor: pointer; 
+position: relative; /* 擬似要素の位置調整に使用 */
+padding-right: 20px; /* アイコン用のスペースを確保 */
+display: block; /* default is inline */
+margin: 0 0 5px 0;
+padding: 0;
+cursor: pointer; /* デフォルトのクリック可能なカーソルを解除 */ 
+}
+
+details summary {
+list-style: none; 
+}
+
+summary { outline: none; }
+
+details summary::-webkit-details-marker {
+display: none; /* for safari*/
+}
+
+details {
+  -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを無効化 */
+}
+.answer {
+  overflow: hidden;
+}
+/* タップやクリック時の強調表示を無効化 */
+details:focus, details:active {
+  outline: none !important; /* フォーカス時の枠線を無効化 */
+  -webkit-tap-highlight-color: transparent; /* タップ時のハイライトを無効化 */
+}
+
+/* plus icons */
+summary::after {
+content: "+"; 
+position: absolute;
+right: 0; 
+top: 10px;
+font-size: 1.4em;
+line-height: 1;
+}
+
+details[open] summary::after {
+content: "−"; 
+font-size: 1.4em;
+line-height: 1;
+}
+
+details details summary::after {
+  content: none !important; /* コンテンツを完全に削除 */
+  display: none !important; /* 完全に非表示にする */
+  position: static !important; /* 位置指定をリセット */
+}
+
+.section-container {
+margin-bottom: 25px;
+}
+
+.section-title {
+font-family: Hershey-Futural--15, sans-serif;
+font-size: 2rem;
+}
+
+@media only screen and (max-width: 720px){
+
+  summary::after {
+
+    font-size: 1.2em;
+    line-height: 0.5;
+    }
+    
+    details[open] summary::after {
+    content: "−"; 
+    font-size: 1.2em;
+    line-height: 0.8;
+    }
+
+  .section-title {
+    font-size: 1.5rem;
+    }
+}
+
+.section-title::after {
+content:"";
+display:block;
+border-bottom: 1px dotted var(--grayA);
+margin-bottom: 10px;
+}
+
+details .section-txtbox p {
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2; /* 1行目のみ表示 */
+overflow: hidden; /* 残りは非表示 */
+}
+
+details[open] .section-txtbox p {
+-webkit-line-clamp: unset; /* 開くとすべてのテキストが表示される */
+overflow: visible; /* 見えるようにする */
+}
+
+
+/* item:sub */
+
+.item-sub {
+  border: 1px dotted var(--grayA);
+  border-radius: 6px;
+  width: fit-content;
+  padding: 3px 8px;
+}
+
+.item-sub:hover {
+  background-color: var(--softyellow);
+  color: var(--grayA);
+}
+
+body.dark-mode .item-sub {
+    border: 1px dotted var(--softyellow);
+}
+
+
+
+/* detail open animation */
+
+/* details summary ~ * {
+  animation-duration: 2s;
+}
+
+details[open] summary ~ * {
+  animation-name: expand;
+}
+
+/* 開閉用のkeyframes */
+/* @keyframes expand {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 800px; /* 内容の最大高さに調整 
+    opacity: 1;
+  }
+}
+ */
+
+
+.table01,
+.table02 {
+margin-top:10px;
+width: 95%;
+border-collapse: collapse;
+table-layout: fixed;
+}
+
+
+/* .table01 td {
+  background-color: var(--softyellow);
+  filter: brightness(1.1);
+} */
+
+table th,
+table td {
+border: 1px dotted var(--grayA);
+text-align: center;
+padding: 10px;
+font-size: 0.8rem;
+}
+
+body.dark-mode table th,
+body.dark-mode table td  {
+border: 1px dotted var(--softyellow);
+}
+
+.table01 thead th:nth-child(1) {
+  box-sizing: border-box;
+}
+
+
+
+
+
+
+
+/* --- main contents rightside--- */
+
+.rightside {
+  display: flex;
+  flex: 1; /* 右側は1つの単位 */
+  height: 100%;
+  position: relative; /* 疑似要素の基準位置 */
+  overflow-x: scroll;
+}
+
+.gallery-container {
+  flex: 1;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: auto;
+  white-space: nowrap;
+  max-width: 100%;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+
+/* 画像 */
+.gallery-item {
+  cursor: pointer;
+  position: relative; /* Ensure we can animate the item independently */
+  animation: scroll-hint 4s ease-out forwards;
+  display: inline-block; /* Ensures the item stays inline and part of the scroll */
+
+}
+
+@keyframes scroll-hint {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+
+
+/* Optional: Make sure that the images have an appropriate width */
+.gallery-item img {
+  width: 100%;
+  height: auto;
+}
+
+
+/* 疑似要素で左右の三角形を追加 */
+.rightside::before,
+.rightside::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+/* 左矢印（三角） */
+.rightside::before {
+  left: 10px;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M 15,2 L 5,10 L 15,18" stroke="%23fff9bf" stroke-width="0.3" fill="none" /></svg>');
+}
+
+/* 右矢印（三角） */
+.rightside::after {
+  right: 10px;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M 5,2 L 15,10 L 5,18" stroke="%23fff9bf" stroke-width="0.3" fill="none" /></svg>');
+}
+
+
+
+
+
+
+
+ 
+  
+  .gallery-container img {
+  max-height: 100%; /* 画像の高さを親要素に合わせる */
+  cursor: pointer; /* クリック可能であることを示す */
+  transition: transform 0.2s ease; /* ホバー時の拡大アニメーション */
+  }
+
+  @media only screen and (max-width: 720px){
+  .rightside {
+  display: flex;
+  flex: 0.3; /* 右側は1つの単位 */
+  border-right: 0px;
+  overflow: auto;
+  }
+  
+  .gallery-container {
+  flex-direction: column;
+  padding:5px;
+  gap: 3px;
+  }
+  
+  .gallery-item {
+    width:100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1; /* 正方形を維持 */
+    animation: none !important;
+    }
+
+  
+  .gallery-container img {
+    height: 110px;
+    }
+
+    .gallery-item {
+  cursor: pointer;
+  animation: scroll-hint 2s ease-out forwards; }
+
+
+
+  .rightside::before,
+  .rightside::after {
+    display:none;
+  }
+
+
+
+  }
+
+
+
+
+
+
+
+/* --- gallery modal --- */
+
+/* --- gallery modal --- */
+.modal {
+  display: none; /* 親要素でflexboxを使用 */
+  justify-content: center; /* 水平方向に中央配置 */
+  align-items: center; /* 垂直方向に中央配置 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--softyellow);
+  z-index: 150;
+}
+
+.modal.open {
+  display: flex;
+}
+
+/* モーダル内のコンテンツを中央に配置 */
+.modal figure {
+  display: flex;
+  flex-direction: column; /* 縦方向に並べる */
+  align-items: center; /* 水平方向に中央配置 */
+  justify-content: center; /* 縦方向に中央配置 */
+  text-align: center;
+  height: 100%; /* 高さを100%にして親要素に合わせる */
+}
+
+/* 画像のスタイリング */
+.modal img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  box-shadow: none;
+}
+
+
+/* キャプションのスタイリング */
+figcaption {
+  position: absolute;
+  bottom: 40px;
+  font-size: 1rem;
+  color: #333;
+}
+
+
+@media only screen and (max-width: 720px){
+  .modal-content {
+  max-height: 65vh; 
+}
+}
+
+
+
+
+
+/* .close-button {
+position: absolute;
+top: 150px; 
+right: 150px; 
+font-size: 100px; 
+font-weight: bold; 
+color: var(--grayA); 
+cursor: pointer; 
+z-index: 160; 
+transition: color 0.3s;
+} */
+
+#close-btn {
+  position: absolute;
+  top: 10px; /* モーダル上からの距離 */
+  right: 20px; /* モーダル右端からの距離 */
+  cursor: pointer; /* クリックできることを示す */
+  z-index: 160; /* 最前面に配置 */
+  transition: color 0.3s;
+}
+
+/* SVGのスタイル（サイズ調整や色の設定） */
+#close-btn svg {
+  width: 100px; /* 幅 */
+  height: 100px; /* 高さ */
+  fill: none; /* 塗りつぶしなし */
+  stroke: var(--softyellow)
+}
+
+
+figure {
+margin: 0; /* デフォルトの余白をリセット */
+text-align: center; /* キャプションを中央揃え */
+
+}
+
+#modal-caption {
+margin: 10px 20px; /* 画像との間隔 */
+font-size: 0.8rem; /* キャプションの文字サイズ */
+color: var(--grayA); 
+}
+
+
+/* モーダルの前後ボタン（prev-btn と next-btn）のスタイル */
+#prev-btn, #next-btn {
+  position: absolute;
+  bottom: 25px;
+  transform: translateY(0%);
+  width: 60px;
+  height: 60px;
+  z-index: 10;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 左矢印（三角） */
+#prev-btn {
+  left:40%;
+
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M 15,2 L 5,10 L 15,18" stroke="%23fff9bf" stroke-width="0.3" fill="none" /></svg>');
+}
+
+/* 右矢印（三角） */
+#next-btn {
+  right: 40%;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 20 20" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M 5,2 L 15,10 L 5,18" stroke="%23fff9bf" stroke-width="0.3" fill="none" /></svg>');
+}
+
+@media only screen and (max-width: 800px){
+  #prev-btn {
+    left:30%;
+}
+  #next-btn {
+  right:30%;
+}
+}
+
+
+.thumbs-container{
+display:flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: flex-end;
+gap: 6px;
+
+}
+
+.picsinthumbs,
+.picsinthumbs_3,
+.picsinthumbs_4,
+.picsinthumbs_5 {
+height: 100px;
+width:100px;
+border-radius: 10px;
+object-fit: cover;
+cursor: pointer;
+}
+
+@media only screen and (max-width: 720px){
+  .picsinthumbs {
+    height: 70px;
+    width: 70px;
+    border-radius: 8px;
+}
+}
+
+
+@media only screen and (max-width: 720px){
+  .picsinthumbs {
+    height: 70px;
+    width: 70px;
+    border-radius: 8px;
+  }
+
+    .ysn-footer::after {
+      content: ""; /* 空にする */
+      position: absolute;
+      display: none;
+      width: 30px;
+      height: 30px;
+      right: 10px;
+      bottom:40px;
+      background-image: url("bau/img/logo/ysn_g_4pt.svg");
+      background-size: contain;
+      background-repeat: no-repeat;
+      }
+}
